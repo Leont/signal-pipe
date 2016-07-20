@@ -51,7 +51,7 @@ BOOT:
 		handles[i] = -1;
 
 SV*
-selfpipe(signo, restart);
+selfpipe(signo, restart = 0);
 	int signo;
 	int restart;
 PREINIT:
