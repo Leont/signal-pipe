@@ -51,9 +51,8 @@ BOOT:
 		handles[i] = -1;
 
 SV*
-selfpipe(signo, restart = 0);
+selfpipe(signo);
 	int signo;
-	int restart;
 PREINIT:
 	int fds[2];
 	struct sigaction action = {0};
@@ -67,7 +66,6 @@ CODE:
 	handles[signo] = fds[1];
 
 	action.sa_handler = handler;
-	action.sa_flags = restart ? SA_RESTART : 0;
 	sigaction(signo, &action, NULL);
 
 	RETVAL = io_fdopen(fds[0], "Signal::Pipe");

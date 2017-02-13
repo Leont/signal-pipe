@@ -25,9 +25,9 @@ XSLoader::load(__PACKAGE__, __PACKAGE__->VERSION);
    }
  });
 
-=func selfpipe($signo, $restart = 0)
+=func selfpipe($signo)
 
-This function sets a signal handler C<$signo> for the process that will write one byte for each handled signal to the file handle that is returned by this function. When the handle becomes readable, you want to drain the filehandle using sysread. The handle is automatically made non-blocking, and signals may be squashed. If C<$restart> is true, the C<SA_RESTART> flag will be set on the handler, and many syscalls will be restarted when interrupted.
+This function sets a signal handler C<$signo> for the process that will write one byte for each handled signal to the file handle that is returned by this function. When the handle becomes readable, you want to drain the filehandle using sysread. The handle is automatically made non-blocking, and signals may be squashed.
 
 Note that there may only be one such handle for each signal in the process, and that the signal delivery is mostly shared between different threads in the same process.
 
