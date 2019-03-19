@@ -61,6 +61,8 @@ CODE:
 		Perl_croak(aTHX_ "Self pipe already established for signal %d", signo);
 	if (pipe(fds) == -1)
 		Perl_croak(aTHX_ "Couldn't open a pipe: %s", Strerror(errno));
+	if (fds[1] > SIG_ATOMIC_MAX)
+		Perl_croak(aTHX_ "Pipe descriptor doesn't fit in a sig_atomic_t");
 	nonblock(fds[0]);
 	nonblock(fds[1]);
 	handles[signo] = fds[1];
